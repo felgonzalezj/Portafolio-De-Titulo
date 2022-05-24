@@ -1,0 +1,48 @@
+{% extends 'app/base.html' %}
+
+{% block contenido %}
+
+<div class="inner">
+	<header>
+		<h1>This is Phantom, a free, fully responsive site<br />
+		template designed by.</h1>
+		<p>Nuestros programas están diseñados para que los huespedes disfruten de una estadía memorable. Con acogedoras habitaciones, además de instalaciones y un restaurant que destaca los productos locales que reciben a cada uno de nuestros huéspedes.</p>
+	</header>
+	<section class="tiles">
+		<article class="style5">
+			<span class="image">
+				<img src="media/pic08.jpg" alt="" />
+			</span>
+			<a href="{% url 'reserva' %}">
+				<h2>Reservas</h2>
+				<div class="content">
+					<p>Ingresa para realizar una reserva.</p>
+				</div>
+			</a>
+		</article>
+		<article class="style2">
+			<span class="image">
+				<img src="media/pic02.jpg" alt="" />
+			</span>
+			<a href="{% url 'gastronomia' %}">
+				<h2>Gastronomia</h2>
+				<div class="content">
+					<p>Aqui podras observar los servicios gastronomicos ofrecidos por el hostal.</p>
+				</div>
+			</a>
+		</article>
+		<article class="style3">
+			<span class="image">
+				<img src="media/pic03.jpg" alt="" />
+			</span>
+			<a href="{% url 'habitaciones' %}">
+				<h2>Habitaciones</h2>
+				<div class="content">
+					<p>Revisa nuestras habitaciones! Asi podras ver cual prefieres a la hora de realizar tu reserva.</p>
+				</div>
+			</a>
+		</article>
+	</section>
+</div>
+
+{% endblock %}
