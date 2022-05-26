@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Administrador, Cliente, DetallePedido , Proveedor, OrdenPedido, Minuta, TipoHabitacion, Habitacion, Promociones, Reserva, Factura, HabitacionReserva, Huesped
+from .models import Administrador, Cliente, DetallePedido , Proveedor, OrdenPedido, Minuta, TipoHabitacion, Habitacion, Promociones, Reserva, Factura, HabitacionReserva, Huesped, HabitacionPrecio
 
 # Register your models here.
 admin.site.site_header = 'Administración Doña Clarita'
@@ -17,3 +17,4 @@ admin.site.register(Reserva)
 admin.site.register(Factura)
 admin.site.register(HabitacionReserva)
 admin.site.register(Huesped)
+admin.site.register(HabitacionPrecio)

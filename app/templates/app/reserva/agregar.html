@@ -1,0 +1,29 @@
+{% extends 'app/base.html' %}
+
+{% block contenido %}
+
+{{mensaje}}
+<div class="row">
+    <div class="col-9 col-md-7 offset-md-1">
+        <div class="card">
+            <div class="card-body">
+                <h2>Realizar reserva</h2>
+                <hr>
+                <form action="" method="post">
+
+                    {% csrf_token%}
+                    {{ form }}
+
+                    <br>
+                    <input type="reset" value="Cancelar">
+                    <input type="submit" value="Guardar">
+
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}

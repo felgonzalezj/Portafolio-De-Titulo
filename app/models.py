@@ -128,14 +128,17 @@ class Promociones(models.Model):
         return self.tipo_promocion + '  ' + self.desc_promocion
 
 
-opciones_precio = [
-    [0, "1 habitacion - $20.000"],
-    [1, "2 habitacion - $40.000"],
-    [2, "3 habitacion - $60.000"],
-    [3, "4 habitacion - $80.000"],
-    [4, "5 habitacion - $100.000"],
-    [5, "6 habitacion - $120.000"],
-]
+class HabitacionPrecio(models.Model):
+    id = models.AutoField(primary_key=True)
+    numero_habi = models.CharField(max_length=20)
+    precio = models.CharField(max_length=20)
+    class Meta:
+        verbose_name = "Nro habitaciones - Precio"
+        verbose_name_plural = "Nro habitaciones - Precio"
+
+    def __str__(self) :
+        return self.numero_habi + ' - ' + self.precio
+
 
 class Reserva(models.Model):
     id_reserva = models.AutoField(primary_key=True)
@@ -146,7 +149,7 @@ class Reserva(models.Model):
     fecha_ingreso = models.DateField()
     fecha_salida = models.DateField()
     telefono_contacto = models.CharField(max_length=15) 
-    precio_nro_habi = models.IntegerField(choices=opciones_precio)
+    precio_nro_habi = models.ForeignKey(HabitacionPrecio, models.PROTECT)
     tipo_habitacion = models.ForeignKey(TipoHabitacion, models.PROTECT)
     servicio_comedor = models.ForeignKey(Minuta, models.PROTECT)
     cliente_rut = models.ForeignKey(Cliente, models.PROTECT)
