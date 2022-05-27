@@ -1,9 +1,9 @@
 from pyexpat.errors import messages
 from django.shortcuts import redirect, render, get_object_or_404
-
 from app.models import Reserva
 from .forms import CustomUserCreationForm, ReservaForm
 from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
 # Create your views here.
 
@@ -24,7 +24,7 @@ def registro(request):
             formulario.save()
             user = authenticate(username = formulario.cleaned_data["username"], password = formulario.cleaned_data["password1"])
             login(request, user)
-            #messages.success(request, "Te has registrado correctamente")
+            messages.success(request, "Te has registrado correctamente")
             return redirect(to="home")
         data["form"] = formulario
     return render(request, 'registration/registro.html', data)
@@ -45,12 +45,11 @@ def reserva(request):
         formulario =  ReservaForm(data=request.POST)
         if formulario.is_valid():
             formulario.save()
-            data["mensaje"] = "Reserva exitosa"
+            messages.success(request, "Reserva exitosa") 
         else:
             data["form"] = formulario
 
     return render(request, 'app/reserva/agregar.html', data)
-
 
 def listar_reservas(request):
     reservas = Reserva.objects.all()
@@ -60,7 +59,6 @@ def listar_reservas(request):
     }
 
     return render(request, 'app/reserva/listar.html', data)
-
 
 def modificar_reserva(request, id):
 
@@ -74,14 +72,15 @@ def modificar_reserva(request, id):
         formulario = ReservaForm(data=request.POST, instance=reserva)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Reserva modificada!")
             return redirect(to="listar_reservas")
         data["form"] = formulario
  
     return render(request, 'app/reserva/modificar.html', data)
 
-
 def eliminar_reserva(request, id):
 
     reserva = get_object_or_404(Reserva, id_reserva = id)
     reserva.delete()
+    messages.success(request, "Eliminado correctamente")
     return redirect(to="listar_reservas")

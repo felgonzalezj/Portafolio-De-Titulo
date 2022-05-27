@@ -1,5 +1,15 @@
 {% extends 'app/base.html' %}
 
+{% block contenido1 %}
+
+	<!-- Logo -->
+	<a href="{% url 'home' %}" class="logo">
+		<span class="symbol"><img src="../media/logo.svg" alt="" /></span><span
+			class="title">Volver al Inicio</span>
+	</a>
+
+{% endblock %}
+
 {% block contenido %}
 
 {{mensaje}}

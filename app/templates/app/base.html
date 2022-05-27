@@ -21,12 +21,10 @@
 		<!-- Header -->
 		<header id="header">
 			<div class="inner">
+				
+				{% block contenido1 %}
 
-				<!-- Logo -->
-				<a href="" class="logo">
-					<span class="symbol"><img src="{% static 'assets/images/logo.svg' %}" alt="" /></span><span
-						class="title">Bienvenido a Hostal Doña Clarita</span>
-				</a>
+				{% endblock %}
 
 				<!-- Nav -->
 				<nav>
@@ -97,6 +95,22 @@
 	<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
 	<script src="{% static 'assets/js/util.js' %}"></script>
 	<script src="{% static 'assets/js/main.js' %}"></script>
+
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+	{% if messages %}
+	{% for m in messages %}
+		<script>
+			Swal.fire({
+				"title": "Accion Realizada Correctamente!",
+				"text": "{{m}}",
+				"icon": "success"
+			})
+		</script>
+	{% endfor%}
+	{% endif %}
+
 
 </body>
 
