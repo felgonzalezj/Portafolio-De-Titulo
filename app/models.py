@@ -8,7 +8,7 @@ class Administrador(models.Model):
     apellido_paterno = models.CharField(max_length=20)
     apellido_materno = models.CharField(max_length=20)
     telefono = models.CharField(max_length=20)
-    email = models.CharField(max_length=20)
+    email = models.CharField(max_length=40)
     cargo = models.CharField(max_length=30)
     class Meta:
         verbose_name = "Administrador"
@@ -25,7 +25,7 @@ class Cliente(models.Model):
     apellidos = models.CharField(max_length=40)
     direccion = models.CharField(max_length=35)
     telefono = models.CharField(max_length=15)
-    email = models.CharField(max_length=30)
+    email = models.CharField(max_length=40)
     nombre_empresa = models.CharField(max_length=30)
     rut_empresa = models.CharField(max_length=40)
     direccion_empresa = models.CharField(max_length=40)
@@ -130,7 +130,7 @@ class Promociones(models.Model):
 
 class HabitacionPrecio(models.Model):
     id = models.AutoField(primary_key=True)
-    numero_habi = models.CharField(max_length=20)
+    numero_habi = models.CharField(max_length=50)
     precio = models.CharField(max_length=20)
     class Meta:
         verbose_name = "Nro habitaciones - Precio"
@@ -145,7 +145,7 @@ class Reserva(models.Model):
     nombre = models.CharField(max_length=20)
     apellidos = models.CharField(max_length=40)
     fecha_reserva = models.DateField()
-    email = models.CharField(max_length=30)
+    email = models.CharField(max_length=40)
     fecha_ingreso = models.DateField()
     fecha_salida = models.DateField()
     telefono_contacto = models.CharField(max_length=15) 
@@ -169,7 +169,7 @@ class Factura(models.Model):
     apellidos_cliente = models.CharField(max_length=40)
     direccion_cliente = models.CharField(max_length=50)
     telefono_cliente = models.CharField(max_length=20)
-    email_cliente = models.CharField(max_length=30)
+    email_cliente = models.CharField(max_length=40)
     detalle_habitaciones = models.CharField(max_length=100)
     detalle_comedor = models.CharField(max_length=100)
     dias_servicio = models.IntegerField()
