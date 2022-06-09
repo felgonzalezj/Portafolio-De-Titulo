@@ -1,9 +1,23 @@
+import imp
+from msilib.schema import Class
+from multiprocessing import context
 from pyexpat.errors import messages
+from re import template
+from urllib import response
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render, get_object_or_404
-from app.models import Reserva
-from .forms import CustomUserCreationForm, ReservaForm
+from django.urls import reverse_lazy
+from app.models import Huesped, Reserva
+from .forms import CustomUserCreationForm, ReservaForm, HuespedForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from django.views import View
+
+import os
+from django.conf import settings
+from django.template import Context
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
 # Create your views here.
 
@@ -45,7 +59,8 @@ def reserva(request):
         formulario =  ReservaForm(data=request.POST)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "Reserva exitosa") 
+            messages.success(request, "Reserva exitosa, Porfavor registrar huespedes correspondientes") 
+            return redirect(to="agregar_huesped")
         else:
             data["form"] = formulario
 
@@ -84,3 +99,76 @@ def eliminar_reserva(request, id):
     reserva.delete()
     messages.success(request, "Eliminado correctamente")
     return redirect(to="listar_reservas")
+
+
+class reserva_pdf(View):
+    def get(self, request, *args, **kwargs):
+        try:
+            template = get_template('app/reserva/pdf.html')
+            reservas = Reserva.objects.all()
+            context = {
+                'reservas': reservas
+            }
+            html = template.render(context)
+            response = HttpResponse(content_type='')
+            response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+            pisaStatus = pisa.CreatePDF(
+                html, dest=response
+            )
+            return response
+        except:
+            pass
+        return HttpResponseRedirect(reverse_lazy('listar-reservas'))
+
+
+def agregar_huesped(request):
+
+    data = {
+        'form' : HuespedForm
+    }
+
+    if request.method == 'POST':
+        formulario =  HuespedForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Huesped agregado") 
+        else:
+            data["form"] = formulario
+
+    return render(request, 'app/huesped/agregar.html', data)
+
+
+def listar_huesped(request):
+
+    huesped = Huesped.objects.all()
+
+    data = {
+        'huesped' : huesped
+    }
+
+    return render(request, 'app/huesped/listar.html', data)
+
+def modificar_huesped(request, id):
+
+    huesped = get_object_or_404(Huesped, rut = id)
+
+    data = {
+        'form': HuespedForm(instance=huesped)
+    }
+
+    if request.method == 'POST':
+        formulario = HuespedForm(data=request.POST, instance=huesped)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Huesped modificado!")
+            return redirect(to="listar_huesped")
+        data["form"] = formulario
+ 
+    return render(request, 'app/huesped/modificar.html', data)
+
+def eliminar_huesped(request, id):
+
+    reserva = get_object_or_404(Huesped, rut = id)
+    reserva.delete()
+    messages.success(request, "Eliminado correctamente")
+    return redirect(to="listar_huesped")

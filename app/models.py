@@ -202,7 +202,6 @@ class Huesped(models.Model):
     apellido_materno = models.CharField(max_length=20)
     telefono = models.CharField(max_length=20)
     fecha_reserva = models.DateField()
-    hora_ingreso = models.CharField(max_length=20)
     fecha_ingreso = models.DateField()
     fecha_salida = models.DateField()
     reserva_id_reserva = models.ForeignKey(Reserva, models.PROTECT)

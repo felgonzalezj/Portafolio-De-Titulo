@@ -51,6 +51,7 @@
 				{% endif %}
 				<li><a href="{% url 'home' %}">Inicio</a></li>
 				<li><a href="{% url 'reserva' %}">Reservas</a></li>
+				<li><a href="{% url 'agregar_huesped' %}">Huespedes</a></li>
 				<li><a href="{% url 'habitaciones' %}">Habitaciones</a></li>
 				<li><a href="{% url 'gastronomia' %}">Gastronomia</a></li>
 				{% if user.is_staff %}
@@ -58,6 +59,9 @@
 				{% endif %}
 				{% if user.is_staff %}
 				<li><a href="{% url 'listar_reservas' %}">Listado De Reservas</a></li>
+				{% endif %}
+				{% if user.is_staff %}
+				<li><a href="{% url 'listar_huesped' %}">Listado De Huespedes</a></li>
 				{% endif %}
 			</ul>
 		</nav>
