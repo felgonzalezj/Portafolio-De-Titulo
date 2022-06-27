@@ -3,7 +3,7 @@ from pyexpat import model
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Reserva, Huesped
+from .models import Reserva, Huesped, Proveedor
 
 class CustomUserCreationForm(UserCreationForm):
 
@@ -36,3 +36,9 @@ class HuespedForm(forms.ModelForm):
             "fecha_ingreso" : forms.SelectDateWidget(),
             "fecha_salida" : forms.SelectDateWidget()
         }
+
+class ProveedorForm(forms.ModelForm):
+
+    class Meta:
+        model = Proveedor
+        fields = ['id_proveedor', 'tipo_proveedor', 'email', 'id_admin']

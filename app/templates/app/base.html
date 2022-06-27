@@ -55,7 +55,7 @@
 				<li><a href="{% url 'habitaciones' %}">Habitaciones</a></li>
 				<li><a href="{% url 'gastronomia' %}">Gastronomia</a></li>
 				{% if user.is_staff %}
-				<li><a href="{% url 'proveedores' %}">Proveedores</a></li>
+				<li><a href="{% url 'listar_proveedores' %}">Proveedores</a></li>
 				{% endif %}
 				{% if user.is_staff %}
 				<li><a href="{% url 'listar_reservas' %}">Listado De Reservas</a></li>

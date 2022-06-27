@@ -200,10 +200,6 @@ class Huesped(models.Model):
     nombre = models.CharField(max_length=20)
     apellido_paterno = models.CharField(max_length=20)
     apellido_materno = models.CharField(max_length=20)
-    telefono = models.CharField(max_length=20)
-    fecha_reserva = models.DateField()
-    fecha_ingreso = models.DateField()
-    fecha_salida = models.DateField()
     reserva_id_reserva = models.ForeignKey(Reserva, models.PROTECT)
     class Meta:
         verbose_name = "Huesped"
