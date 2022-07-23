@@ -49,6 +49,9 @@
 				<li class=""><a href="{% url 'login' %}">Log in</a></li>
 				<li><a href="{% url 'registro' %}">Registrarse</a></li>
 				{% endif %}
+				{% if user.is_staff %}
+				<li><a href="/admin">Ir al admin</a></li>
+				{% endif %}
 				<li><a href="{% url 'home' %}">Inicio</a></li>
 				<li><a href="{% url 'reserva' %}">Reservas</a></li>
 				<li><a href="{% url 'agregar_huesped' %}">Huespedes</a></li>
@@ -122,3 +125,5 @@
 </body>
 
 </html>
+
+
